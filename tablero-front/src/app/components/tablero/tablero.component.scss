@@ -1,0 +1,93 @@
+.tablero {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  overflow-x: auto;
+  //el alto de la ventana menos 64px de altura del nav y 56 del paginador
+  min-height: calc(100vh - 64px - 56px);
+  background-color: #f2f2f2;
+  padding: 0 30px;
+}
+
+.tablero p{
+  margin: 0;
+}
+
+.tablero h1{
+  font-weight: 500;
+}
+
+.porhacer,
+.proceso,
+.terminada {
+  flex-basis: calc(30% - 20px);
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border-radius: 5px;
+  max-width: 30%;
+  
+  h3 {
+    margin-top: 0;
+  }
+
+  .card {
+    margin-bottom: 10px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+  }
+}
+
+
+
+mat-card {
+  margin: 0.25rem 0;
+  position: relative;
+  overflow: hidden;
+}
+mat-card:hover {
+  cursor: pointer;
+  background-color: #d1ebf7;
+}
+
+mat-card p { 
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 3;
+}
+
+.tarjeta:hover .eliminar {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: rgb(91, 91, 91);
+  padding: 0;
+  margin: 0;
+}
+
+.eliminar {
+  display: none;
+}
+
+mat-chip-set {
+  margin-left: 10px;
+}
+
+.chip-content {
+  color: white;
+  font-weight: 500;
+}
+
+mat-chip.low-priority {
+  background-color: green;
+}
+
+mat-chip.medium-priority {
+  background-color: orange;
+}
+
+mat-chip.high-priority {
+  background-color: red;
+}

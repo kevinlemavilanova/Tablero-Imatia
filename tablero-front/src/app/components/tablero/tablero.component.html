@@ -1,0 +1,78 @@
+<div class="tablero">
+  <div
+    *ngFor="let columna of columnas"
+    class="{{ columna.clase }}"
+    cdkDropList
+    [id]="columna.clase"
+    [cdkDropListData]="columna.data"
+    [cdkDropListConnectedTo]="columna.connectedDropLists"
+    (cdkDropListDropped)="drop($event, columna.titulo)"
+  >
+    <h1>{{ columna.titulo }}</h1>
+    <div
+      class="tarjeta"
+      *ngFor="
+        let tarea of columna.data.slice(
+          paginator.pageIndex * paginator.pageSize,
+          (paginator.pageIndex + 1) * paginator.pageSize
+        )
+      "
+      cdkDrag
+    >
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title (click)="openDialogVistaTarea(tarea)"
+            >{{ tarea.titulo | slice : 0 : 20
+            }}{{ tarea.titulo.length > 20 ? "..." : "" }}</mat-card-title
+          >
+          <mat-chip-set>
+            <mat-chip
+              [ngClass]="{
+                'low-priority': tarea.peso >= 0 && tarea.peso <= 5,
+                'medium-priority': tarea.peso > 5 && tarea.peso <= 7,
+                'high-priority': tarea.peso > 7 && tarea.peso <= 10
+              }"
+            >
+              <span class="chip-content">
+                <ng-container *ngIf="tarea.peso >= 1 && tarea.peso <= 5"
+                  >LOW</ng-container
+                >
+                <ng-container *ngIf="tarea.peso > 5 && tarea.peso <= 7"
+                  >MEDIUM</ng-container
+                >
+                <ng-container *ngIf="tarea.peso > 7 && tarea.peso <= 10"
+                  >HIGH</ng-container
+                >
+              </span>
+            </mat-chip>
+          </mat-chip-set>
+        </mat-card-header>
+        <button
+          mat-icon-button
+          class="eliminar"
+          (click)="eliminarTarea(tarea.id)"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+        <mat-card-content>
+          <p>
+            {{ tarea.descripcion | slice : 0 : 75
+            }}{{ tarea.titulo.length > 75 ? "..." : "" }}
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <button mat-raised-button color="primary" (click)="openDialogNuevaTarea()">
+      <mat-icon>add_card</mat-icon>
+    </button>
+  </div>
+</div>
+<mat-divider [vertical]="true"></mat-divider>
+
+<mat-paginator
+  #paginator
+  [pageSizeOptions]="[5]"
+  [pageSize]="pageSize"
+  [length]="length"
+  (page)="onPageChanged($event)"
+></mat-paginator>

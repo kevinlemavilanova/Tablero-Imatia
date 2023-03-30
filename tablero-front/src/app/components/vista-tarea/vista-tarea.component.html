@@ -1,0 +1,46 @@
+<div class="form-container" color="primary">
+  <h2>Detalles de la tarea</h2>
+
+  <div class="task-details">
+    <div class="task-content">
+      <div class="task-section">
+        <h3>{{ tarea.titulo }}</h3>
+        <mat-divider></mat-divider>
+      </div>
+  
+      <div class="task-section">
+        <div class="task-property">
+          <mat-icon>description</mat-icon>
+          <p>{{ tarea.descripcion }}</p>
+        </div>
+  
+        <div class="task-property">
+          <mat-icon>today</mat-icon>
+          <p>{{ tarea.fechaVencimiento }}</p>
+        </div>
+  
+        <div class="task-property">
+          <mat-icon>bar_chart</mat-icon>
+          <p>{{ tarea.peso }}</p>
+        </div>
+  
+        <div class="task-property">
+          <mat-icon>done</mat-icon>
+          <p>{{ tarea.estado }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="form-buttons">
+      <button mat-raised-button color="warn" (click)="cerrarDialogo()">
+        <mat-icon>clear</mat-icon>
+        Atrás
+      </button>
+      <button mat-raised-button color="primary" (click)="completarTarea()">
+        <mat-icon>check</mat-icon>
+        Completar tarea
+      </button>
+    </div>
+  </div>
+  

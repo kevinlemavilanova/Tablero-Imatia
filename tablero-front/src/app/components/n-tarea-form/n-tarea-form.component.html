@@ -1,0 +1,75 @@
+<div class="form-container" color="primary">
+  <h2>Formulario de Tareas</h2>
+  <form id="tarea-form" [formGroup]="tareaForm" (ngSubmit)="onSubmit()">
+    <div class="form-column-left">
+      <div class="form-field">
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Título"
+            formControlName="titulo"
+          />
+        </mat-form-field>
+      </div>
+      <div class="form-field">
+        <mat-form-field>
+          <textarea
+            matInput
+            placeholder="Descripción"
+            formControlName="descripcion"
+          ></textarea>
+        </mat-form-field>
+      </div>
+      <div class="form-field">
+        <mat-form-field>
+          <input
+            matInput
+            type="number"
+            placeholder="Peso"
+            formControlName="peso"
+            min="1" 
+            max="10"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="form-column-right">
+      <div class="form-field">
+        <mat-form-field>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            placeholder="Fecha de Vencimiento"
+            formControlName="fechaVencimiento"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="form-field">
+        <mat-form-field>
+          <mat-label>Estado</mat-label>
+          <mat-select [(value)]="tarea.estado" formControlName="estado">
+            <mat-option value="Por hacer">Por hacer</mat-option>
+            <mat-option value="En proceso">En proceso</mat-option>
+            <mat-option value="Terminada">Terminada</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+  <div class="form-buttons">
+    <button mat-raised-button color="warn" (click)="cerrarDialogo()">
+      <mat-icon>clear</mat-icon>
+      Cancelar
+    </button>
+    <button mat-raised-button color="primary" [disabled]="!tareaForm.valid" type="submit" form="tarea-form" (ngSubmit)="onSubmit()">
+      <mat-icon>save</mat-icon>
+      Guardar
+    </button>
+  </div>
+</div>
